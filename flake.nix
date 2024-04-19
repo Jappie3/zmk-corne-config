@@ -346,12 +346,12 @@
         '';
       };
 
-    packages."x86_64-linux".zmk_left = zmkFirmware "zmk_left";
-    packages."x86_64-linux".zmk_right = zmkFirmware "zmk_right";
+    packages."x86_64-linux".zmk_left = zmkFirmware "left";
+    packages."x86_64-linux".zmk_right = zmkFirmware "right";
 
     zmkFirmware = name: let
       board = "nice_nano_v2";
-      shield = "corne_left";
+      shield = "corne_${name}";
       zmk = builtins.fetchGit {
         url = "https://github.com/zmkfirmware/zmk";
         rev = "e22bc7620cef763d9ad80e9b98182273de9973db";
@@ -652,7 +652,7 @@
       zephyr-modules = "${zephyrproject-rtos_canopennode};${zephyrproject-rtos_chre};${zephyrproject-rtos_lz4};${zephyrproject-rtos_nanopb};${zephyrproject-rtos_psa-arch-tests};${zephyrproject-rtos_sof};${zephyrproject-rtos_tf-m-tests};${zephyrproject-rtos_tflite-micro};${zephyrproject-rtos_thrift};${zephyrproject-rtos_zscilib};${zephyrproject-rtos_acpica};${zephyrproject-rtos_babblesim-manifest};${BabbleSim_base};${BabbleSim_ext_2G4_libPhyComv1};${BabbleSim_ext_2G4_phy_v1};${BabbleSim_ext_2G4_channel_NtNcable};${BabbleSim_ext_2G4_channel_multiatt};${BabbleSim_ext_2G4_modem_magic};${BabbleSim_ext_2G4_modem_BLE_simple};${BabbleSim_ext_2G4_device_burst_interferer};${BabbleSim_ext_2G4_device_WLAN_actmod};${BabbleSim_ext_2G4_device_playback};${BabbleSim_ext_libCryptov1};${cmsis};${zephyrproject-rtos_cmsis-dsp};${zephyrproject-rtos_cmsis-nn};${zephyrproject-rtos_edtt};${zephyrproject-rtos_fatfs};${zephyrproject-rtos_hal_altera};${zephyrproject-rtos_hal_ambiq};${zephyrproject-rtos_hal_atmel};${zephyrproject-rtos_hal_espressif};${zephyrproject-rtos_hal_ethos_u};${zephyrproject-rtos_hal_gigadevice};${zephyrproject-rtos_hal_infineon};${zephyrproject-rtos_hal_intel};${zephyrproject-rtos_hal_microchip};${zephyrproject-rtos_hal_nordic};${zephyrproject-rtos_hal_nuvoton};${zephyrproject-rtos_hal_nxp};${zephyrproject-rtos_hal_openisa};${zephyrproject-rtos_hal_quicklogic};${zephyrproject-rtos_hal_renesas};${zephyrproject-rtos_hal_rpi_pico};${zephyrproject-rtos_hal_silabs};${zephyrproject-rtos_hal_st};${zephyrproject-rtos_hal_stm32};${zephyrproject-rtos_hal_telink};${zephyrproject-rtos_hal_ti};${zephyrproject-rtos_hal_wurthelektronik};${zephyrproject-rtos_hal_xtensa};${zephyrproject-rtos_libmetal};${zephyrproject-rtos_liblc3};${zephyrproject-rtos_littlefs};${zephyrproject-rtos_loramac-node};${zephyrproject-rtos_lvgl};${zephyrproject-rtos_mbedtls};${zephyrproject-rtos_mcuboot};${zephyrproject-rtos_mipi-sys-t};${zephyrproject-rtos_net-tools};${zephyrproject-rtos_nrf_hw_models};${zephyrproject-rtos_open-amp};${zephyrproject-rtos_openthread};${zephyrproject-rtos_percepio};${zephyrproject-rtos_picolibc};${zephyrproject-rtos_segger};${zephyrproject-rtos_tinycrypt};${zephyrproject-rtos_trusted-firmware-m};${zephyrproject-rtos_trusted-firmware-a};${zephyrproject-rtos_uoscore-uedhoc};${zephyrproject-rtos_zcbor};";
     in
       pkgs.stdenvNoCC.mkDerivation {
-        name = "${name}";
+        name = "zmk_${name}";
         src = ./.;
         nativeBuildInputs = with pkgs; [gcc cmake ninja dtc python3] ++ (with python311Packages; [pyaml pykwalify packaging pyelftools]);
 
@@ -691,7 +691,7 @@
 
         installPhase = ''
           mkdir -p $out/
-          cp ./build/zephyr/zmk.uf2 $out/${name}.uf2
+          cp ./build/zephyr/zmk.uf2 $out/zmk_${name}.uf2
         '';
       };
   };
