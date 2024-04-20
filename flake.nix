@@ -185,8 +185,6 @@
       ];
     };
 
-    # takes +-20 mins to build
-    # nix build .#crosstool-ng
     packages."x86_64-linux".crosstool-ng = pkgs.stdenvNoCC.mkDerivation {
       name = "crosstool-ng";
       src = builtins.fetchGit {
@@ -245,8 +243,6 @@
       '';
     };
 
-    # takes at least 1h15m
-    # nix build .#zephyr-sdk --keep-failed
     packages."x86_64-linux".zephyr-sdk = let
       toolchain_minimal = builtins.fetchTarball {
         url = "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${zephyr-sdk-version}/zephyr-sdk-${zephyr-sdk-version}_linux-x86_64_minimal.tar.xz";
