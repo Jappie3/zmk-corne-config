@@ -348,8 +348,8 @@
         '';
       };
 
-    packages."x86_64-linux".zmk_left = zmkFirmware "left" "nice_nano_v2" "corne_left;nice_view_adapter;nice_view";
-    packages."x86_64-linux".zmk_right = zmkFirmware "right" "nice_nano_v2" "corne_right;nice_view_adapter;nice_view";
+    packages."x86_64-linux".corne_left = zmkFirmware "left" "nice_nano_v2" "corne_left;nice_view_adapter;nice_view";
+    packages."x86_64-linux".corne_right = zmkFirmware "right" "nice_nano_v2" "corne_right;nice_view_adapter;nice_view";
     packages."x86_64-linux".zmk_reset = zmkFirmware "reset" "nice_nano_v2" "settings_reset";
 
     zmkFirmware = name: board: shields: let
