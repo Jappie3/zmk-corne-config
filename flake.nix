@@ -346,12 +346,10 @@
         '';
       };
 
-    packages."x86_64-linux".zmk_left = zmkFirmware "left";
-    packages."x86_64-linux".zmk_right = zmkFirmware "right";
+    packages."x86_64-linux".zmk_left = zmkFirmware "left" "nice_nano_v2" "corne_left;nice_view_adapter;nice_view";
+    packages."x86_64-linux".zmk_right = zmkFirmware "right" "nice_nano_v2" "corne_right;nice_view_adapter;nice_view";
 
-    zmkFirmware = name: let
-      board = "nice_nano_v2";
-      shield = "corne_${name}";
+    zmkFirmware = name: board: shields: let
       zmk = builtins.fetchGit {
         url = "https://github.com/zmkfirmware/zmk";
         rev = "e22bc7620cef763d9ad80e9b98182273de9973db";
@@ -668,7 +666,7 @@
         cmakeFlags = [
           "-Bbuild"
           "-GNinja"
-          "-DSHIELD='${shield}'"
+          "-DSHIELD='${shields}'"
           "-DBOARD='${board}'"
           "-DZEPHYR_MODULES=${zephyr-modules}"
           "-DBUILD_VERSION=0.1"
