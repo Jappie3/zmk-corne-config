@@ -4,7 +4,7 @@ set -e
 
 # deps: west, awk, sed, ripgrep
 
-# make sure you have the following files from the zephyrproject-rtos/zephyr repo in the zephyr/ directory:
+# make sure you have the following files from the https://github.com/zmkfirmware/zephyr/tree/v3.5.0%2Bzmk-fixes/ repo in the zephyr/ directory:
 # zephyr/
 # ├── submanifests
 # │   └── optional.yaml
