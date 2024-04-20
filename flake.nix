@@ -175,6 +175,8 @@
   in rec {
     devShells.${pkgs.system}.default = pkgs.mkShell {
       packages = with pkgs; [
+        # useful while debugging
+        tio
         # deps of nix_inputs.sh:
         gnused
         gawk
