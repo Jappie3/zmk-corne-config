@@ -10,7 +10,8 @@
 #include <dt-bindings/zmk/ext_power.h> // EXT_POWER_TOGGLE_CMD, EXT_POWER_ON_CMD & EXT_POWER_OFF_CMD
 
 &nice_view_spi {
-  cs-gpios = <&pro_micro 2 GPIO_ACTIVE_HIGH>;
+	// pin 0 (nice!nano) is wired to CS (nice!view)
+	cs-gpios = <&pro_micro 0 GPIO_ACTIVE_HIGH>;
 };
 
 / {
