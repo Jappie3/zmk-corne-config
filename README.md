@@ -18,6 +18,15 @@ Note: these packages are configured for the `arm-cortex_a15-linux-gnueabihf` arc
 
 ## Repo structure
 
-The `zmk-zephyr/` directory contains the minimal files necessary to run `west manifest --resolve`. The bash script in that directory can be used to parse the repos & revisions from `west manifest --resolve` to the `builtins.fetchTarball` format that Nix can use.
+```
+.
+├── config
+├── corne-ultralight-pcb
+└── zmk-zephyr
+```
 
-The files under `config/` are my personal ZMK config files.
+`config/` contains my personal ZMK config files.
+
+All the Kicad files in `corne-ultralight-pcb` were originally copied from [petejohanson's fork of foostan's crkbd repo](https://github.com/petejohanson/crkbd/tree/board/corne-ultralight/corne-ultralight/pcb), more specifically the `corne-ultralight` branch. This branch added support for the `nice!view` display, I then modded the PCB to support Cherry Hotswap sockets.
+
+The `zmk-zephyr/` directory contains the minimal files necessary to run `west manifest --resolve`. The bash script in that directory can be used to parse the repos & revisions from `west manifest --resolve` to the `builtins.fetchTarball` format that Nix can use.
